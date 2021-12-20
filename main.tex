@@ -1,0 +1,296 @@
+\newcommand{\NUMBER}{1}
+\newcommand{\EXERCISES}{4}
+% Автор:
+\newcommand{\COURSE}{Надежность подводных робототехнических систем}
+\newcommand{\STUDENTA}{Исаев Федор}
+\newcommand{\DEADLINE}{СМ11-11М}
+
+% Пакеты:
+\documentclass[a4paper]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pdflscape}
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage{polynom}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{forloop}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{algpseudocode,algorithm,algorithmicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+
+% Размеры листа
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+% Колонтитулы
+\pagestyle {fancy}
+\fancyhead[L]{\COURSE}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[C]{\thepage }
+
+% Заголовок
+\def\header#1#2{
+  \begin{center}
+    {\Large Семестровый проект}\\
+    {(#2)}
+  \end{center}
+}
+
+%Табличка рядом с фамилиями
+\newcounter{punktelistectr}
+\newcounter{punkte}
+\newcommand{\punkteliste}[2]{%
+  \setcounter{punkte}{#2}%
+  \addtocounter{punkte}{-#1}%
+  \stepcounter{punkte}%
+  \begin{center}%
+  \begin{tabularx}{\linewidth}[]{@{}*{\thepunkte}{>{\centering\arraybackslash} X|}@{}>{\centering\arraybackslash}X}
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        \thepunktelistectr &
+      }
+      #2 &  $\Sigma$ \\
+      \hline
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\
+    \end{tabularx}
+  \end{center}
+}
+
+\begin{document}
+
+% Фамилия
+\begin{tabularx}{\linewidth}{m{0.3 \linewidth}X}
+  \begin{minipage}{\linewidth}
+    \vspace{0.8em}
+    \STUDENTA\\
+  \end{minipage} & \begin{minipage}{\linewidth}
+    \punkteliste{1}{\EXERCISES}
+  \end{minipage}\\
+\end{tabularx}
+
+\header{Nr. \NUMBER}{\DEADLINE}
+
+
+
+% Начало
+
+\section*{Задачи}
+\subsection*{a) Задача 1:}
+
+В теченне некоторого времени проводилось наблюденне за работой $N_0$ эк-
+земпляров восстанавливаемых изделий. Каждый из образцов проработал $t_i$ часов и имел
+$n_i$ отказов. Требуется определить среднюю наработку на отказ по данным наблюдения
+за работой всех изделий. Исходные данные для расчёта приведены в таблице
+\newline
+
+
+\begin{center}
+\begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c | c | c | c |}
+  \hline
+  \multirow{1}{*}{Номер Варианта} & \multicolumn{10}{| c |}{Исходные данные}  \\
+    \cline{2-11}
+    & $n_1$ & $t_1$, ч & $n_2$ & $t_2$, ч & $n_3$ & $t_3$, ч & $n_4$ & $t_4$, ч & $n_5$ & $t_5$, ч \\
+  \hline
+  4 & 6 & 144 & 5 & 125 & 3 & 80 & - & - & - & - \\
+  \hline
+\end{tabular}
+\end{center}
+
+Решение:
+
+\[\overline{t_\text{ср}} = \frac{t_\Sigma}{n_\Sigma}\]
+
+\[t_\Sigma = \sum\limits_{i=1}^n t_i = 144 \text{ч} + 125 \text{ч} + 80 \text{ч} = 349 \text{ч}\]
+
+\[n_\Sigma = \sum\limits_{i=1}^n n_i = 6 + 5 + 3 = 14\]
+
+\[\overline{t_\text{ср}} = \frac{349 \text{ч}}{14} \approx 25 \text{ч} \] \\
+
+Ответ: 25 \text{ч}.
+
+\subsection*{b) Задача 2:}
+
+В течение времени $\Delta t$ проводилось наблюдение за восстанавливаемым изде-
+лием и было зафикспровано $n (\Delta t)$ отказов. До начала наблюдення изделне проработа-
+ло $t_1$ часов, общее время наработки $K$ концу наблюдения составило $t_2$ часов. Требуется
+найти среднюю наработку на отказ. Исходные данные для расчёта приведены в таблице.
+
+\begin{center}
+\begin{tabular}{| c | c | c | c |}
+  \hline
+  \multirow{1}{*}{Номер Варианта} & \multicolumn{3}{| c |}{Исходные данные}  \\
+    \cline{2-4}
+    & $t_1$, час & $t_2$, час & $n(\Delta t)$ \\
+  \hline
+  4 & 1200 & 5558 & 2 \\
+  \hline
+\end{tabular}
+\end{center}
+
+Решение:
+
+\[\overline{t_\text{ср}} = \frac{1}{n(\Delta t)}\]
+
+\[t = t_2 - t_1 = 5558 \text{ч} - 1200 \text{ч} = 4358 \text{ч}\]
+
+\[\overline{t_\text{ср}} = \frac{4358 \text{ч}}{2} = 2179 \text{ч}\] \\
+
+Ответ: 2179 \text{ч}.
+
+\subsection*{c) Задача 3:}
+
+Система состоит из $N$ приборов, имеющих разную надёжность. Известно, что
+каждый из приборов, проработав вне системы $t_i$ часов, имел $n_i$ отказов. Для каждого из
+приборов справедлив экспоненциальный закон распределения отказов. Найти среднюю
+наработку на отказ всей системы. Исходные данные для расчёта приведены в таблице.
+
+\begin{center}
+\begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c | c | c | c | c |}
+  \hline
+  \multirow{1}{*}{Номер Варианта} & \multicolumn{11}{| c |}{Исходные данные}  \\
+    \cline{2-12}
+    & $N$ & $t_1$, ч & $n_1$ & $t_2$, ч & $n_2$ & $t_3$, ч & $n_3$ & $t_4$, ч & $n_4$ & $t_5$, ч & $n_5$ \\
+  \hline
+  4 & 5 & 90 & 3 & 270 & 6 & 140 & 4 & 230 & 5 & 180 & 3 \\
+  \hline
+\end{tabular}
+\end{center}
+
+Решение:
+
+\[\overline{t_\text{ср}} = \frac{1}{\lambda}\]
+
+\[\lambda = \sum\limits_{i=1}^n \lambda_i\]
+
+\[\lambda_1 = \frac{3}{90 \text{ч}} = 0.033333 \text{ч}^{-1}, \quad\lambda_2 = \frac{6}{270 \text{ч}} \approx 0.022222 \text{ч}^{-1}\]
+
+\[\lambda_3 = \frac{4}{140 \text{ч}} = 0.028571 \text{ч}^{-1}, \quad\lambda_4 = \frac{5}{230 \text{ч}} = 0.021739 \text{ч}^{-1}\]
+
+\[\lambda_5 = \frac{3}{180 \text{ч}} = 0.016666 \text{ч}^{-1}\]
+
+\[\lambda = 0.12253 \text{ч}^{-1}\]
+
+\[\overline{t_\text{ср}} = \frac{1}{0.0049 \text{ч}^{-1}} \approx 8,2 \text{ч}\] \\
+
+Ответ: 8,2 \text{ч}.
+
+\subsection*{d) Задача 4:}
+
+В результате обработки данных по испытаниям и эксплуатации, получен
+вариационный ряд значений времени безотказной работы изделия в часах. Требуется
+определить закон распределения времени безотказной работы. Исходные данные для
+расчёта и ответы приведены в таблице.
+
+\begin{center}
+\begin{tabular}{| c | c |}
+  \hline
+    Варианты & Исходные данные, $t_i$, ч\\
+  \hline
+     & 3; 4; 5; 5; 6; 6; 7; 7; 7; 7; 8; 9; 10; 10; 11; 12;\\
+     & 12; 12; 12; 12; 14; 14; 15; 15; 15; 16; 17; 18; 20;\\
+  4  & 20; 20; 21; 21; 22; 22; 23; 29; 30; 32; 33; 37; 38;\\
+     & 40; 40; 40; 42; 45; 46; 48; 49; 50; 53; 55; 55; 73;\\
+     & 86; 90; 110; 129\\
+  \hline
+\end{tabular}
+\end{center}
+
+Решение: \\ \\
+Всего 56 измерений.\\
+\begin{center}
+\begin{tabular}{| c | c | c |}
+  \hline
+    \Delta t & n(\Delta t) & \lambda(\Delta t)\\
+  \hline
+   0-25 & 36 & 0.0378 \\
+   25-50 & 14 & 0.0430  \\
+   50-75 & 4 & 0.0320  \\
+   75-100 & 2 & 0.0266  \\
+   100-125 & 1 & - \\
+   125-150 & 1 & -      \\
+  \hline
+\end{tabular}
+\end{center}
+
+\[\]
+\[\lambda_i = \frac{n(\Delta t_i)}{\Delta t \cdot N_{\text{ср}i}}\]
+
+\[N_{\text{ср}1} = \frac{56 + (56 - 36)}{2} = 38\]
+\[N_{\text{ср}2} = \frac{20 + (20 - 14)}{2} = 13\]
+\[N_{\text{ср}3} = \frac{6 + (6 - 2)}{2} = 5\]
+\[N_{\text{ср}4} = \frac{4 + (4 - 2)}{2} = 3\] 
+
+\[\lambda_\text{ср} = \frac{0.0378 + 0.0430 + 0.0320 + 0.0266}{4} = 0.0348 \text{ч}^{-1} \]
+
+\[D = \lambda_{max} - \lambda_\text{ср} = 0.0430 - 0.0348 = 0.0082 \text{ч}^{-1}\]
+
+\[D\sqrt{k} = 0.0082\sqrt{56} = 0.061 < 1\]
+
+\begin{tikzpicture}
+\begin{axis}[%
+    scale only axis,
+    width=5in,
+    height=4in,
+    xmin=0, xmax=150,
+    ymin=0, ymax=40]
+\addplot[
+    ybar,
+    bar width=0.8in, 
+    bar shift=0in,
+    fill=pink,
+    draw=black] 
+    plot coordinates {
+	(12.5, 38) (37.5, 13) (62.5, 5) 
+	(87.5, 3) (112.5, 1) (137.5, 1) 
+};
+\end{axis}
+\begin{axis}[%
+    scale only axis,
+    width=5in,
+    height=4in,
+    ticks=none,
+    xmin=0, xmax=100,
+    ymin=0, ymax=68]
+\addplot[
+    domain=0:150, 
+    ultra thick,
+    draw=blue] 
+    {62.9792 * exp(-0.0407568 * x)};
+\end{axis}
+\end{tikzpicture}
+
+\\
+
+Ответ: В соответствии с критерием считаем, что закон распределения \textbf{экспоненциальный}.
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
